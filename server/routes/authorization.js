@@ -5,7 +5,7 @@ import User from '../models/User.js';
 const saltRounds = 10;
 const router = express.Router();
 
-router.post('/api/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user && (await bcrypt.compare(password, user.password))) {
@@ -20,7 +20,7 @@ router.post('/api/login', async (req, res) => {
   return res.status(401).end();
 });
 
-router.post('/api/signup', async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
     const { email, password, username } = req.body;
     const user = new User({
@@ -41,7 +41,7 @@ router.post('/api/signup', async (req, res) => {
   }
 });
 
-router.get('/api/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   req.session.destroy(() => {
     res.clearCookie('user_sid');
     res.end();

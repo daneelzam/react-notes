@@ -7,7 +7,7 @@ function Logout() {
   const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
-    fetch('/api/logout')
+    fetch('/api/auth/logout')
       .then(() => {
         dispatch(logoutAC());
         history.push('/');

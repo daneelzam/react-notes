@@ -4,7 +4,7 @@ const windowState = JSON.parse(window.localStorage.getItem('state'));
 
 let preloadedState = {};
 
-if (windowState) {
+if (windowState && windowState.auth) {
   preloadedState = { isAuth: windowState.auth.isAuth, user: windowState.auth.user };
 } else {
   preloadedState = { isAuth: false, user: { email: '', username: '' } };
