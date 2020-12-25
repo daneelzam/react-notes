@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import {
-  ADD_NOTEBOOK, ADD_NOTE, INIT_NOTEBOOK, SELECT_ACTIVE_NOTEBOOK
+  ADD_NOTEBOOK, ADD_NOTE, INIT_NOTEBOOK, SELECT_ACTIVE_NOTEBOOK, DELETE_NOTEBOOK, DELETE_NOTE
 } from '../types';
 
 // window.localStorage.removeItem('state');
@@ -35,6 +35,17 @@ const mainReducer = (state = preloadedState, action) => {
 
     case ADD_NOTEBOOK:
       return { ...state, notebooks: [...state.notebooks, action.payload] };
+    case DELETE_NOTEBOOK:
+      if (state.activeNotebook._id !== action.payload._id) {
+        return {
+          ...state,
+          notebooks: state.notebooks.filter((notebook) => notebook._id !== action.payload._id)
+        };
+      } return {
+        ...state,
+        notebooks: state.notebooks.filter((notebook) => notebook._id !== action.payload._id),
+        activeNotebook: {}
+      };
     case SELECT_ACTIVE_NOTEBOOK:
       return { ...state, activeNotebook: action.payload };
     case ADD_NOTE:
@@ -47,6 +58,23 @@ const mainReducer = (state = preloadedState, action) => {
           return notebook;
         }),
         activeNotebook: action.payload
+      };
+    case DELETE_NOTE:
+      return {
+        ...state,
+        activeNotebook: {
+          ...state.activeNotebook,
+          notes: state.activeNotebook.notes.filter((note) => note._id !== action.payload)
+        },
+        notebooks: state.notebooks.map((notebook) => {
+          if (notebook._id === state.activeNotebook._id) {
+            return {
+              ...notebook,
+              notes: notebook.notes.filter((note) => note._id !== action.payload)
+            };
+          }
+          return notebook;
+        })
       };
     default:
       return state;

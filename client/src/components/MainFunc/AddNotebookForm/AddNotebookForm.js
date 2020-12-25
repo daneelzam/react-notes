@@ -21,7 +21,8 @@ function AddNotebookForm() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ title, email })
-    }).then((res) => res.json())
+    })
+      .then((res) => res.json())
       .then((serverData) => {
         if (serverData) {
           dispatch(addNotebookAC(serverData));
@@ -31,19 +32,24 @@ function AddNotebookForm() {
       .catch(() => setError('Something went wrong try again'));
   };
   return (
-        <form onSubmit={handleSubmit}>
-        <fieldset>
-            <legend>Create new notebook</legend>
-            <label>
-                Title:
-                <input name='title' type='text' required onChange={handleChange} value={ title }/>
-            </label>
-            <button type="submit">Create</button>
-            <div className='error'>
-                {error}
-            </div>
-        </fieldset>
-        </form>
+    <form onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label for="title"><h4 className='text-light'>Create your notebook: </h4></label>
+        <input
+          className="form-control"
+          name="title"
+          type="text"
+          required
+          onChange={handleChange}
+          value={title}
+        />
+        <small id="emailHelp" class="form-text text-muted">In a notebook, you can create notes</small>
+        <div className="error">{error}</div>
+      </div>
+      <button className="btn btn-outline-light" type="submit">
+        Create
+      </button>
+    </form>
   );
 }
 export default AddNotebookForm;

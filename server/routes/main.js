@@ -36,6 +36,16 @@ router.post('/notebook', async (req, res) => {
   }
 });
 
+router.delete('/notebook/:id', async (req, res) => {
+  const { id } = req.params;
+  const notebook = await Notebook.findById(id);
+  await notebook.notes.forEach(async (noteId) => {
+    await Note.findByIdAndDelete(noteId);
+  });
+  await Notebook.findByIdAndDelete(id);
+  res.status(200).end();
+});
+
 router.post('/note', async (req, res) => {
   const { title, body, notebookID } = req.body;
   const notebook = await Notebook.findOne({ _id: notebookID });
@@ -54,6 +64,16 @@ router.post('/note', async (req, res) => {
   } catch (error) {
     return res.status(401).end();
   }
+});
+
+router.delete('/note', async (req, res) => {
+  const { noteId, notebookId } = req.query;
+  const notebook = await Notebook.findById(notebookId).populate('notes');
+  // eslint-disable-next-line eqeqeq
+  notebook.notes = notebook.notes.filter((note) => !(note._id == noteId));
+  await notebook.save();
+  await Note.findByIdAndDelete(noteId);
+  res.status(200).end();
 });
 
 export default router;

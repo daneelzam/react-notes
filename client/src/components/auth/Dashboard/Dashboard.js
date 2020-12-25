@@ -8,12 +8,21 @@ function Dashboard() {
   const user = useSelector((state) => state.auth.user);
   const activeNotebook = useSelector((state) => state.main.activeNotebook);
   return (
-        <div>
-          Hello {user.username}
+    <div className="align-self-xl-stretch" style={{ height: '80%' }}>
+      <h1 style={{ textAlign: 'center' }}>Hello {user.username}</h1>
+      <div
+      className="align-items-stretch align-self-xl-stretch d-flex justify-content-center  align-items-center align-content-center"
+      style={{ padding: '0 10rem 0 10rem', height: '100%' }}
+      >
+        <div className='bg-info' style={{ width: '30%' }}>
           <AddNotebookForm />
           <NotebookList />
-          <NoteList notebook={activeNotebook}/>
         </div>
+        <div className='bg-light' style={{ width: '70%' }}>
+        <NoteList notebook={activeNotebook} />
+        </div>
+      </div>
+    </div>
   );
 }
 export default Dashboard;
