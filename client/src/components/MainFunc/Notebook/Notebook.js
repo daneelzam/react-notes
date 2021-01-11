@@ -5,7 +5,11 @@ import { deleteNotebookAC, selsectActiveNotebookAC } from '../../../redux/action
 
 function Notebook({ notebook }) {
   const dispatch = useDispatch();
-  const clickHandler = () => {
+  const clickHandler = ({ target }) => {
+    target.parentNode.parentNode.childNodes.forEach((li) => {
+      li.childNodes[0].classList.remove('active');
+    });
+    target.classList.add('active');
     dispatch(selsectActiveNotebookAC(notebook));
   };
   const deleteHandler = () => {
@@ -22,9 +26,9 @@ function Notebook({ notebook }) {
     });
   };
   return (
-        <li>
-        <button type='button' onClick={clickHandler}>{notebook.title}</button>
-        <button type='button' onClick={deleteHandler}>&#10006;</button>
+        <li className='list-group-item d-flex justify-content-between mt-1 mb-1' style={{ backgroundColor: '#3F3F41' }}>
+        <button type='button' className='btn btn-outline-light' onClick={clickHandler}>{notebook.title}</button>
+        <button type='button' className='btn btn-outline-danger' style={{ textAlign: 'center' }} onClick={deleteHandler}>delete</button>
         </li>
   );
 }

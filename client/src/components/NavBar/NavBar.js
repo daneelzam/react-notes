@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 function NavBar() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   return (
-    <nav className='navbar navbar-light justify-content-center align-self-xl-stretch' style={{ backgroundColor: '#ffc107' }}>
+    <nav className='navbar navbar-light justify-content-center align-self-xl-stretch' style={{ backgroundColor: '#F6CA29' }}>
      <Link className='navbar-brand' to="/">Notes</Link>
      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>

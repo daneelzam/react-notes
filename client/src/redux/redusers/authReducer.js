@@ -19,6 +19,7 @@ const authReducer = (state = preloadedState, action) => {
         user: action.payload
       };
     case LOGOUT:
+      window.localStorage.removeItem('state');
       return {
         ...state,
         isAuth: false,

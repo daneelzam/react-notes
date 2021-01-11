@@ -21,7 +21,7 @@ function Note({ note }) {
   };
   return (
         <li>
-            <span>{note && note.title}:</span> {note && note.body} <button type='button' onClick={deleteHandler}>&#10006;</button>
+            <span>{note && note.title}:</span> {note && note.body} <button type='button' className='btn' onClick={deleteHandler}>delete</button>
         </li>
   );
 }

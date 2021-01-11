@@ -21,7 +21,8 @@ function AddNotebookForm() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ title, body, notebookID: activeNotebook._id })
-    }).then((res) => res.json())
+    })
+      .then((res) => res.json())
       .then((serverData) => {
         if (serverData) {
           return dispatch(addNoteAC(serverData));
@@ -31,23 +32,53 @@ function AddNotebookForm() {
       .catch(() => setError('Something went wrong try again'));
   };
   return (
-        <form onSubmit={handleSubmit}>
-        <fieldset>
-            <legend>Create new note</legend>
-            <label>
-                Title:
-                <input name='title' type='text' required onChange={handleChange} value={ title }/>
-            </label>
-            <label>
-                Body:
-                <input name='body' type='text' required onChange={handleChange} value={ body }/>
-            </label>
-            <button type="submit">Create</button>
-            <div className='error'>
-                {error}
-            </div>
-        </fieldset>
-        </form>
+    <form
+      className="p-3 form-group d-flex flex-column align-items-center"
+      style={{ backgroundColor: '#F6CA29' }}
+      onSubmit={handleSubmit}
+    >
+
+        <button
+          className="btn btn-outline-dark"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseExample"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+          New notes
+        </button>
+      <div className="collapse" id="collapseExample">
+      <fieldset className="p-3 form-group d-flex flex-column align-items-start">
+        <legend>Create new note</legend>
+        <label>
+          <h5>Title:</h5>
+          <input
+            className="form-control"
+            name="title"
+            type="text"
+            required
+            onChange={handleChange}
+            value={title}
+          />
+        </label>
+        <label>
+          <h5>Body:</h5>
+          <textarea
+            className="form-control"
+            name="body"
+            rows="5"
+            cols="100"
+            required
+            onChange={handleChange}
+            value={body}
+          />
+        </label>
+        <button type="submit" className="btn btn-outline-dark">Create</button>
+        <div className="error">{error}</div>
+      </fieldset>
+      </div>
+    </form>
   );
 }
 export default AddNotebookForm;

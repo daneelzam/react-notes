@@ -32,9 +32,21 @@ function AddNotebookForm() {
       .catch(() => setError('Something went wrong try again'));
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label for="title"><h4 className='text-light'>Create your notebook: </h4></label>
+    <form className='p-3 form-group d-flex flex-column align-items-center' style={{ backgroundColor: '#3F3F41' }} onSubmit={handleSubmit}>
+    <button
+          className="btn btn-outline-light"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseNotebookForm"
+          aria-expanded="false"
+          aria-controls="collapseNotebookForm"
+        >
+          New notebook
+        </button>
+        <div className="collapse" id="collapseNotebookForm">
+
+      <div className="form-group d-flex flex-column align-items-center mt-3">
+        <label htmlFor="title"><h4 className='text-light'>Create your notebook: </h4></label>
         <input
           className="form-control"
           name="title"
@@ -43,12 +55,13 @@ function AddNotebookForm() {
           onChange={handleChange}
           value={title}
         />
-        <small id="emailHelp" class="form-text text-muted">In a notebook, you can create notes</small>
+        <small id="emailHelp" className="form-text text-muted">In a notebook, you can create notes</small>
         <div className="error">{error}</div>
-      </div>
       <button className="btn btn-outline-light" type="submit">
         Create
       </button>
+      </div>
+        </div>
     </form>
   );
 }

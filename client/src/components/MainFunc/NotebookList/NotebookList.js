@@ -14,7 +14,7 @@ function NotebookList() {
       .then((notebookList) => dispatch(initNotebookAC(notebookList)));
   }, []);
   return (
-        <ul>
+        <ul className='list-group'>
             {notebooks
             && notebooks.map((notebook) => <Notebook key={notebook._id} notebook={notebook}/>)}
         </ul>
