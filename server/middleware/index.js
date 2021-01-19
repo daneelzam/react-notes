@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import sessionFileStore from 'session-file-store';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import cookieCleaner from './auth.js';
 import dbConnect from './dbConnect.js';
 
@@ -12,6 +13,7 @@ const FileStore = sessionFileStore(session);
 
 const config = (app) => {
   dotenv.config();
+  app.use(cors());
   dbConnect();
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
