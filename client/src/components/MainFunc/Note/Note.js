@@ -8,7 +8,7 @@ function Note({ note }) {
   const activeNotebook = useSelector((state) => state.main.activeNotebook);
   const deleteHandler = () => {
     const noteId = note._id;
-    fetch(`/api/notes/note?noteId=${noteId}&notebookId=${activeNotebook._id}`, {
+    fetch(`${process.env.REACT_APP_URL}/api/notes/note?noteId=${noteId}&notebookId=${activeNotebook._id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'Application/json'

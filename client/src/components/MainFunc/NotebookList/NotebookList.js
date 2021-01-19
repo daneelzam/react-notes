@@ -9,7 +9,7 @@ function NotebookList() {
   const email = useSelector((state) => state.auth.user.email);
   const notebooks = useSelector((state) => state.main.notebooks);
   useEffect(() => {
-    fetch(`/api/notes/notebook/${email}`)
+    fetch(`${process.env.REACT_APP_URL}/api/notes/notebook/${email}`)
       .then((res) => res.json())
       .then((notebookList) => dispatch(initNotebookAC(notebookList)));
   }, []);

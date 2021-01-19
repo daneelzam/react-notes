@@ -15,7 +15,7 @@ function AddNotebookForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch('/api/notes/note', {
+    fetch(`${process.env.REACT_APP_URL}/api/notes/note`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

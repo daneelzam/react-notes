@@ -9,10 +9,13 @@ function NoteList() {
   return (
         <div>
         <AddNoteForm />
-        <ul>
+        {
+        activeNotebook
+        && <ul>
             {activeNotebook.notes
             && activeNotebook.notes.map((note) => <Note key={note._id} note={note}/>)}
-        </ul>
+          </ul>
+        }
         </div>
   );
 }

@@ -14,7 +14,7 @@ function SignUp() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch('https://notes-dz.herokuapp.com/api/auth/signup', {
+    fetch(`${process.env.REACT_APP_URL}/api/auth/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

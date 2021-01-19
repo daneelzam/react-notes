@@ -14,7 +14,7 @@ function Notebook({ notebook }) {
   };
   const deleteHandler = () => {
     const notebookId = notebook._id;
-    fetch(`/api/notes/notebook/${notebookId}`, {
+    fetch(`${process.env.REACT_APP_URL}/api/notes/notebook/${notebookId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'Application/json'
